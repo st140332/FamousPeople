@@ -42,12 +42,12 @@ public class MainActivity extends AppCompatActivity {
  //           users.add(user);
   //      }
 
-        AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "productionn")
-                .allowMainThreadQueries()
-                .build();
+   //     AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+   //            AppDatabase.class, "productionn")
+    //            .allowMainThreadQueries()
+   //             .build();
 
-
+        AppDatabase db = App.getInstance().getDatabase();
 
         List<User> users = db.userDao().getAllUsers();
 

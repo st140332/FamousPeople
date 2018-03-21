@@ -35,10 +35,12 @@ public class CreateUser extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         button = (Button)findViewById(R.id.button);
 
-       final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-                AppDatabase.class, "productionn")
-                .allowMainThreadQueries()
-                .build();
+      // final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
+      //          AppDatabase.class, "productionn")
+       //         .allowMainThreadQueries()
+       //         .build();
+
+       final AppDatabase db = App.getInstance().getDatabase();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
