@@ -35,18 +35,11 @@ public class CreateUser extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         button = (Button)findViewById(R.id.button);
 
-      // final AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-      //          AppDatabase.class, "productionn")
-       //         .allowMainThreadQueries()
-       //         .build();
-
        final AppDatabase db = App.getInstance().getDatabase();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // TODO: 20.03.2018 save user to DB 
-               // Log.d(TAG, "onClick: firstName" + firstName.getText().toString());
                 db.userDao().insertAll(new User(firstName.getText().toString(),lastName.getText().toString(),
                         email.getText().toString()));
                 startActivity(new Intent(CreateUser.this,MainActivity.class));

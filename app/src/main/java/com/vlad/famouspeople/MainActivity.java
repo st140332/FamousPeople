@@ -35,18 +35,6 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view) ;
 
-   //     users = new ArrayList<>();
-//
-//        for (int i = 0; i <100 ; i++) {
- //           User user = new User("Mike #" + i, "Petrovic", "mikpet@email.com");
- //           users.add(user);
-  //      }
-
-   //     AppDatabase db = Room.databaseBuilder(getApplicationContext(),
-   //            AppDatabase.class, "productionn")
-    //            .allowMainThreadQueries()
-   //             .build();
-
         AppDatabase db = App.getInstance().getDatabase();
 
         List<User> users = db.userDao().getAllUsers();
