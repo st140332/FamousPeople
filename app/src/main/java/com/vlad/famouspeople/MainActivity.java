@@ -37,7 +37,12 @@ public class MainActivity extends AppCompatActivity {
 
         AppDatabase db = App.getInstance().getDatabase();
 
+        // User user = db.userDao().getById(4);
+        //db.userDao().delete(user);
+        
         List<User> users = db.userDao().getAllUsers();
+
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(users);
