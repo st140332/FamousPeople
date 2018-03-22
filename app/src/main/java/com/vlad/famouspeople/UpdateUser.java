@@ -17,7 +17,8 @@ public class UpdateUser extends AppCompatActivity {
     EditText firstName;
     EditText lastName;
     EditText email;
-    Button button;
+    Button buttonUpdate;
+    Button buttonDelete;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,11 +27,12 @@ public class UpdateUser extends AppCompatActivity {
         firstName = (EditText)findViewById(R.id.first_name);
         lastName = (EditText)findViewById(R.id.last_name);
         email = (EditText)findViewById(R.id.email);
-        button = (Button)findViewById(R.id.Update);
+        buttonUpdate = (Button)findViewById(R.id.Update);
+        buttonDelete = (Button)findViewById(R.id.Delete);
 
         getParam();
 
-       button.setOnClickListener(new View.OnClickListener() {
+       buttonUpdate.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View view) {
                AppDatabase db = App.getInstance().getDatabase();
@@ -43,6 +45,17 @@ public class UpdateUser extends AppCompatActivity {
                startActivity(new Intent(UpdateUser.this, MainActivity.class));
            }
         });
+
+       buttonDelete.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               AppDatabase db = App.getInstance().getDatabase();
+               int Id =getIntent().getIntExtra("Id",1);
+               User user = db.userDao().getById(Id);
+               db.userDao().delete(user);
+               startActivity(new Intent(UpdateUser.this, MainActivity.class));
+           }
+       });
     }
 
     public void getParam(){
