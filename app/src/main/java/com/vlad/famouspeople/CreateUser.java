@@ -24,7 +24,6 @@ public class CreateUser extends AppCompatActivity {
     EditText lastName;
     EditText email;
     Button button;
-    ArrayList<String> users;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

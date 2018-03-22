@@ -21,6 +21,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".CreateUser"></activity>
+        <activity android:name=".UpdateUser" />
     </application>
 
 </manifest>
