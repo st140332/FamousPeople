@@ -30,14 +30,15 @@ public class UpdateUser extends AppCompatActivity {
         buttonUpdate = (Button)findViewById(R.id.Update);
         buttonDelete = (Button)findViewById(R.id.Delete);
 
+        final AppDatabase db = App.getInstance().getDatabase();
+        final int Id =getIntent().getIntExtra("Id",1);
+        final User user = db.userDao().getById(Id);
+
         getParam();
 
        buttonUpdate.setOnClickListener(new View.OnClickListener() {
            @Override
             public void onClick(View view) {
-               AppDatabase db = App.getInstance().getDatabase();
-               int Id =getIntent().getIntExtra("Id",1);
-                 User user = db.userDao().getById(Id);
                user.setFirstName(firstName.getText().toString());
                user.setLastName(lastName.getText().toString());
                user.setEmail(email.getText().toString());
@@ -49,9 +50,6 @@ public class UpdateUser extends AppCompatActivity {
        buttonDelete.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               AppDatabase db = App.getInstance().getDatabase();
-               int Id =getIntent().getIntExtra("Id",1);
-               User user = db.userDao().getById(Id);
                db.userDao().delete(user);
                startActivity(new Intent(UpdateUser.this, MainActivity.class));
            }

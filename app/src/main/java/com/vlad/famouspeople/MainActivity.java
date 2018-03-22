@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
-   // ArrayList<User> users;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

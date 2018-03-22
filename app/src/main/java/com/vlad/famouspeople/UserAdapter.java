@@ -69,7 +69,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             firstName = (TextView) itemView.findViewById(R.id.first_name);
             lastName = (TextView) itemView.findViewById(R.id.last_name);
             email = (TextView) itemView.findViewById(R.id.email);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayoyt);
+            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
         }
     }
 }
