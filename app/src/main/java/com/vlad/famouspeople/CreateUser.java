@@ -24,7 +24,7 @@ public class CreateUser extends AppCompatActivity {
     EditText lastName;
     EditText email;
     Button button;
-    //int points=1;
+    int points=1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,13 +35,14 @@ public class CreateUser extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         button = (Button)findViewById(R.id.button);
 
+
        final AppDatabase db = App.getInstance().getDatabase();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 db.userDao().insertAll(new User(firstName.getText().toString(),lastName.getText().toString(),
-                        email.getText().toString()));
+                        email.getText().toString(),points));
                 startActivity(new Intent(CreateUser.this,MainActivity.class));
             }
         });

@@ -10,10 +10,11 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class User {
 
-    public User(String firstName, String lastName, String email) {
+    public User(String firstName, String lastName, String email,int points) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.points=points;
     }
 
     @PrimaryKey(autoGenerate = true)

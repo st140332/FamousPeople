@@ -41,6 +41,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         holder.firstName.setText(users.get(position).getFirstName());
         holder.lastName.setText(users.get(position).getLastName());
         holder.email.setText(users.get(position).getEmail());
+        holder.points.setText(Integer.toString(users.get(position).getPoints()));
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,9 +61,13 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             public void onClick(View view) {
                // user.setEmail(email.getText().toString());
                // db.userDao().update(user);
-                users.get(position).setPoints(+1);
+                //users.get(position).setPoints(+1);
                 User user = db.userDao().getById(users.get(position).getId());
+                user.setPoints((users.get(position).getPoints())+1);
                 db.userDao().update(user);
+
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
             }
         });
     }
@@ -76,6 +81,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView firstName;
         public TextView lastName;
         public TextView email;
+        public TextView points;
         public Button plus;
 
         public LinearLayout linearLayout;
@@ -85,8 +91,10 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             firstName = (TextView) itemView.findViewById(R.id.first_name);
             lastName = (TextView) itemView.findViewById(R.id.last_name);
             email = (TextView) itemView.findViewById(R.id.email);
+            points = (TextView) itemView.findViewById(R.id.points);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
             plus = (Button)itemView.findViewById(R.id.plus);
+
 
         }
     }
