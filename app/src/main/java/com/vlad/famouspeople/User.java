@@ -24,6 +24,8 @@ public class User {
     private String lastName;
     @ColumnInfo(name = "email")
     private String email;
+    @ColumnInfo(name = "points")
+    private int points;
 
     public int getId() {
         return id;
@@ -56,4 +58,10 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public int getPoints() {return points;}
+
+    public void setPoints(int points) {this.points = points;}
+
+
 }

@@ -24,6 +24,7 @@ public class CreateUser extends AppCompatActivity {
     EditText lastName;
     EditText email;
     Button button;
+    //int points=1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +52,19 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 context.startActivity(intent);
             }
         });
+
+        holder.plus.setOnClickListener(new View.OnClickListener() {
+            AppDatabase db = App.getInstance().getDatabase();
+           //  User user = db.userDao().getById(Id);
+            @Override
+            public void onClick(View view) {
+               // user.setEmail(email.getText().toString());
+               // db.userDao().update(user);
+                users.get(position).setPoints(+1);
+                User user = db.userDao().getById(users.get(position).getId());
+                db.userDao().update(user);
+            }
+        });
     }
 
     @Override
@@ -62,6 +76,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView firstName;
         public TextView lastName;
         public TextView email;
+        public Button plus;
+
         public LinearLayout linearLayout;
 
         public ViewHolder(View itemView) {
@@ -70,6 +86,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             lastName = (TextView) itemView.findViewById(R.id.last_name);
             email = (TextView) itemView.findViewById(R.id.email);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
+            plus = (Button)itemView.findViewById(R.id.plus);
+
         }
     }
 }

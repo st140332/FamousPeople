@@ -61,8 +61,10 @@ public class UpdateUser extends AppCompatActivity {
         String LName = getIntent().getStringExtra("LName");
         String Email = getIntent().getStringExtra("Email");
 
+
         firstName.setText(FName);
         lastName.setText(LName);
         email.setText(Email);
+
     }
 }
