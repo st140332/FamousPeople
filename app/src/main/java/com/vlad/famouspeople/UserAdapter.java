@@ -25,6 +25,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<User> users;
     private  Context context;
 
+
     public UserAdapter(List<User> users) {
         this.users = users;
     }
@@ -54,9 +55,9 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             }
         });
 
+        final AppDatabase db = App.getInstance().getDatabase();
         holder.plus.setOnClickListener(new View.OnClickListener() {
-            AppDatabase db = App.getInstance().getDatabase();
-           //  User user = db.userDao().getById(Id);
+
             @Override
             public void onClick(View view) {
                // user.setEmail(email.getText().toString());
@@ -65,7 +66,18 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 User user = db.userDao().getById(users.get(position).getId());
                 user.setPoints((users.get(position).getPoints())+1);
                 db.userDao().update(user);
+                //notifyDataSetChanged();
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User user = db.userDao().getById(users.get(position).getId());
+                user.setPoints((users.get(position).getPoints())-1);
+                db.userDao().update(user);
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
             }
@@ -83,6 +95,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView email;
         public TextView points;
         public Button plus;
+        public Button minus;
 
         public LinearLayout linearLayout;
 
@@ -94,6 +107,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             points = (TextView) itemView.findViewById(R.id.points);
             linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
             plus = (Button)itemView.findViewById(R.id.plus);
+            minus = (Button)itemView.findViewById(R.id.minus);
 
 
         }
