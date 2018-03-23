@@ -26,7 +26,6 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<User> users;
     private  Context context;
 
-
     public UserAdapter(List<User> users) {
         this.users = users;
     }
@@ -109,8 +108,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             linearLayout = (RelativeLayout) itemView.findViewById(R.id.linearLayout);
             plus = (Button)itemView.findViewById(R.id.plus);
             minus = (Button)itemView.findViewById(R.id.minus);
-
-
         }
     }
+
 }

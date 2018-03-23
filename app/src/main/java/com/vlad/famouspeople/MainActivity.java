@@ -10,14 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     RecyclerView.Adapter adapter;
     FloatingActionButton fab;
+    AppDatabase db = App.getInstance().getDatabase();
+    List<User> users = db.userDao().getAllUsers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,10 +43,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view) ;
-
-        AppDatabase db = App.getInstance().getDatabase();
-
-        List<User> users = db.userDao().getAllUsers();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(users);
@@ -53,13 +57,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateUser.class));
             }
         });
-
-
-
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.mymenu, menu);
         return true;
     }
@@ -70,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.settings:
                 Toast.makeText(MainActivity.this,"Working",Toast.LENGTH_SHORT).show();
+                Collections.shuffle(users,new Random(System.nanoTime()));
+                adapter = new UserAdapter(users);
+                recyclerView.setAdapter(adapter);
                 break;
             case R.id.help:
                 Toast.makeText(MainActivity.this,"Working too",Toast.LENGTH_SHORT).show();
@@ -77,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
 
 
 }
