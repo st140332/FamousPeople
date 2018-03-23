@@ -1,41 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<android.support.v7.widget.CardView android:layout_margin="@dimen/cardview_compat_inset_shadow"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="12dp"
     android:id="@+id/linearLayout">
 
     <TextView
         android:id="@+id/first_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        tools:text="Vladislavs"
+        android:layout_centerHorizontal="true"
         android:textSize="24sp"/>
     <TextView
         android:id="@+id/last_name"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/first_name"
+        android:layout_centerHorizontal="true"
+        tools:text="Selakovs"
         android:textSize="14sp"/>
     <TextView
         android:id="@+id/email"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/last_name"
+        android:layout_centerHorizontal="true"
+        tools:text="ittester@gmail.com"
         android:textSize="14sp"/>
     <TextView
         android:id="@+id/points"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:layout_below="@+id/email"
+        android:layout_centerHorizontal="true"
+        tools:text="10"
+        android:textSize="30sp"/>
 
     <Button
         android:id="@+id/plus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="+"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@mipmap/pluss"/>
 
     <Button
         android:id="@+id/minus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="-"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignBottom="@id/plus"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:background="@mipmap/minuss"/>
 
-</LinearLayout>
+</RelativeLayout>
+</android.support.v7.widget.CardView>

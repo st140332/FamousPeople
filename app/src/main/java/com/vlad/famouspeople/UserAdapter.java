@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -97,7 +98,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public Button plus;
         public Button minus;
 
-        public LinearLayout linearLayout;
+        public RelativeLayout linearLayout;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -105,7 +106,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             lastName = (TextView) itemView.findViewById(R.id.last_name);
             email = (TextView) itemView.findViewById(R.id.email);
             points = (TextView) itemView.findViewById(R.id.points);
-            linearLayout = (LinearLayout) itemView.findViewById(R.id.linearLayout);
+            linearLayout = (RelativeLayout) itemView.findViewById(R.id.linearLayout);
             plus = (Button)itemView.findViewById(R.id.plus);
             minus = (Button)itemView.findViewById(R.id.minus);
 
