@@ -9,6 +9,6 @@ import java.util.Comparator;
 public class PointsComparator implements Comparator<User> {
     @Override
     public int compare(User user, User t1) {
-        return user.getEmail().compareTo(t1.getEmail());
+        return user.getPoints().compareTo(t1.getPoints());
     }
 }

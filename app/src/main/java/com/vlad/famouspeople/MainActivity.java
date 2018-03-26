@@ -72,26 +72,20 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId())
         {
             case R.id.byname:
-                Toast.makeText(MainActivity.this,"Working",Toast.LENGTH_SHORT).show();
-
-               // users.sort((s1, s2) -> s1.getFirstName() - s2.getFirstName());
+                Toast.makeText(MainActivity.this,"Sorted!",Toast.LENGTH_SHORT).show();
                 Collections.sort(users, new NameComparator());
-                adapter = new UserAdapter(users);
-                recyclerView.setAdapter(adapter);
                 break;
             case R.id.bysurname:
-                Toast.makeText(MainActivity.this,"Working too",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this,"Sorted!",Toast.LENGTH_SHORT).show();
                 Collections.sort(users, new SurnameComparator());
-                adapter = new UserAdapter(users);
-                recyclerView.setAdapter(adapter);
                 break;
             case R.id.bypoints:
-                Toast.makeText(MainActivity.this,"Working final",Toast.LENGTH_SHORT).show();
-                Collections.sort(users, new SurnameComparator());
-                adapter = new UserAdapter(users);
-                recyclerView.setAdapter(adapter);
+                Toast.makeText(MainActivity.this,"Sorted!",Toast.LENGTH_SHORT).show();
+                Collections.sort(users, new PointsComparator());
                 break;
         }
+        adapter = new UserAdapter(users);
+        recyclerView.setAdapter(adapter);
         return true;
     }
 
