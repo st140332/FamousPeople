@@ -3,13 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/settings"
-        android:title="@string/action_settings"
+        android:id="@+id/byname"
+        android:title="Sort by Name"
         app:showAsAction="never"
         />
     <item
-        android:id="@+id/help"
-        android:title="@string/help"
+        android:id="@+id/bysurname"
+        android:title="Sort by Surname"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/bypoints"
+        android:title="Sort by Points"
         app:showAsAction="never"
         />
 </menu>

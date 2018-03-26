@@ -25,6 +25,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
+import static java.util.Arrays.sort;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -69,14 +71,25 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId())
         {
-            case R.id.settings:
+            case R.id.byname:
                 Toast.makeText(MainActivity.this,"Working",Toast.LENGTH_SHORT).show();
-                Collections.shuffle(users,new Random(System.nanoTime()));
+
+               // users.sort((s1, s2) -> s1.getFirstName() - s2.getFirstName());
+                Collections.sort(users, new NameComparator());
                 adapter = new UserAdapter(users);
                 recyclerView.setAdapter(adapter);
                 break;
-            case R.id.help:
+            case R.id.bysurname:
                 Toast.makeText(MainActivity.this,"Working too",Toast.LENGTH_SHORT).show();
+                Collections.sort(users, new SurnameComparator());
+                adapter = new UserAdapter(users);
+                recyclerView.setAdapter(adapter);
+                break;
+            case R.id.bypoints:
+                Toast.makeText(MainActivity.this,"Working final",Toast.LENGTH_SHORT).show();
+                Collections.sort(users, new SurnameComparator());
+                adapter = new UserAdapter(users);
+                recyclerView.setAdapter(adapter);
                 break;
         }
         return true;
