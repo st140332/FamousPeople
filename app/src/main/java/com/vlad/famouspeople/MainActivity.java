@@ -16,15 +16,19 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.vlad.famouspeople.Sort.NameComparator;
+import com.vlad.famouspeople.Sort.PointsComparator;
+import com.vlad.famouspeople.Sort.SurnameComparator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
-
 import static java.util.Arrays.sort;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(users);
         recyclerView.setAdapter(adapter);
+        //adapter.notifyDataSetChanged();
 
         //MenuItem item = (MenuItem)findViewById(R.id.settings);
 
@@ -59,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateUser.class));
             }
         });
+
     }
 
     @Override

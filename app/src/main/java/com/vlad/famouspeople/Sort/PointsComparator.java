@@ -1,4 +1,6 @@
-package com.vlad.famouspeople;
+package com.vlad.famouspeople.Sort;
+
+import com.vlad.famouspeople.User;
 
 import java.util.Comparator;
 

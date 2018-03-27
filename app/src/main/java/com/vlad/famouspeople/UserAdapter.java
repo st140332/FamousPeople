@@ -25,6 +25,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
 class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<User> users;
     private  Context context;
+    RecyclerView.Adapter adapter;
 
     public UserAdapter(List<User> users) {
         this.users = users;
@@ -69,6 +70,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 //notifyDataSetChanged();
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
+
+
             }
         });
 
@@ -78,6 +81,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 User user = db.userDao().getById(users.get(position).getId());
                 user.setPoints((users.get(position).getPoints())-1);
                 db.userDao().update(user);
+
                 Intent intent = new Intent(context, MainActivity.class);
                 context.startActivity(intent);
             }
