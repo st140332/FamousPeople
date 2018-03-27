@@ -53,9 +53,22 @@ public class MainActivity extends AppCompatActivity {
         search=(EditText)findViewById(R.id.search) ;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new UserAdapter(users);
+
+        adapter = new UserAdapter(users, new UserAdapter.UserAdapterListener() {
+            @Override
+            public void onClickAtOKButton(int position) {
+                //User user = db.userDao().getById(users.get(position).getId());
+                //user.setPoints((users.get(position).getPoints())+1);
+                //db.userDao().update(user);
+                Toast.makeText(MainActivity.this,"Clicked at : " + position,Toast.LENGTH_SHORT).show();
+                
+               adapter.notifyItemChanged(position);
+
+            }
+        });
+
         recyclerView.setAdapter(adapter);
-        //adapter.notifyDataSetChanged();
+
         addTextListener();
         //MenuItem item = (MenuItem)findViewById(R.id.settings);
 
@@ -66,9 +79,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateUser.class));
             }
         });
-
-
-
     }
 
     @Override
@@ -94,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 Collections.sort(users, new PointsComparator());
                 break;
         }
-        adapter = new UserAdapter(users);
+        //adapter = new UserAdapter(users,null);
         recyclerView.setAdapter(adapter);
         return true;
     }
@@ -123,12 +133,16 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                adapter = new UserAdapter(filteredList);
+                adapter = new UserAdapter(filteredList, new UserAdapter.UserAdapterListener() {
+                    @Override
+                    public void onClickAtOKButton(int position) {
+                        Toast.makeText(MainActivity.this,"Clicked from TextWatcher : " + position,Toast.LENGTH_SHORT).show();
+                    }
+                });
                 recyclerView.setAdapter(adapter);
-                adapter.notifyDataSetChanged();
+                //adapter.notifyDataSetChanged();
             }
         });
     }
-
 
 }

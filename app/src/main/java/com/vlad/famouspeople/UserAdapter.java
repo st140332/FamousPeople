@@ -25,10 +25,15 @@ import static android.support.v4.content.ContextCompat.startActivity;
 class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<User> users;
     private  Context context;
-    RecyclerView.Adapter adapter;
+    private UserAdapterListener mListener;
 
-    public UserAdapter(List<User> users) {
+    public interface UserAdapterListener {
+        void onClickAtOKButton(int position);
+    }
+
+    public UserAdapter(List<User> users, UserAdapterListener mListener) {
         this.users = users;
+        this.mListener = mListener;
     }
 
     @Override
@@ -64,12 +69,16 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                // user.setEmail(email.getText().toString());
                // db.userDao().update(user);
                 //users.get(position).setPoints(+1);
+
                 User user = db.userDao().getById(users.get(position).getId());
                 user.setPoints((users.get(position).getPoints())+1);
                 db.userDao().update(user);
+
+
                 //notifyDataSetChanged();
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
+                //Intent intent = new Intent(context, MainActivity.class);
+                //context.startActivity(intent);
+                mListener.onClickAtOKButton(position);
 
 
             }
