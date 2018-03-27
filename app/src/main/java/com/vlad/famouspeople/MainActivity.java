@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     AppDatabase db = App.getInstance().getDatabase();
     List<User> users = db.userDao().getAllUsers();
+    EditText search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +50,13 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view) ;
+        search=(EditText)findViewById(R.id.search) ;
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter(users);
         recyclerView.setAdapter(adapter);
         //adapter.notifyDataSetChanged();
-
+        addTextListener();
         //MenuItem item = (MenuItem)findViewById(R.id.settings);
 
         fab = (FloatingActionButton)findViewById(R.id.fab);
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, CreateUser.class));
             }
         });
+
+
 
     }
 
@@ -93,6 +97,37 @@ public class MainActivity extends AppCompatActivity {
         adapter = new UserAdapter(users);
         recyclerView.setAdapter(adapter);
         return true;
+    }
+
+    public void addTextListener(){
+
+        search.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {}
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            public void onTextChanged(CharSequence query, int start, int before, int count) {
+
+                query = query.toString().toLowerCase();
+
+                final List<User> filteredList = new ArrayList<>();
+
+                for (int i = 0; i < users.size(); i++) {
+
+                    final String text = users.get(i).getFirstName().toLowerCase();
+                    if (text.contains(query)) {
+
+                        filteredList.add(users.get(i));
+                    }
+                }
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                adapter = new UserAdapter(filteredList);
+                recyclerView.setAdapter(adapter);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
 
