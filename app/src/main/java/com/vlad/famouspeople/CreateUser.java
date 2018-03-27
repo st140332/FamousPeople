@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +25,7 @@ public class CreateUser extends AppCompatActivity {
     EditText lastName;
     EditText email;
     Button button;
-    int points=1;
+    int points=0;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,15 +36,22 @@ public class CreateUser extends AppCompatActivity {
         email = (EditText)findViewById(R.id.email);
         button = (Button)findViewById(R.id.button);
 
-
        final AppDatabase db = App.getInstance().getDatabase();
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                db.userDao().insertAll(new User(firstName.getText().toString(),lastName.getText().toString(),
-                        email.getText().toString(),points));
-                startActivity(new Intent(CreateUser.this,MainActivity.class));
+                String name = firstName.getText().toString().trim();
+                String surname = lastName.getText().toString().trim();
+                if(TextUtils.isEmpty(name))
+                {firstName.setError("Enter Firstname!");}
+               else if(TextUtils.isEmpty(surname))
+                {lastName.setError("Enter Lastname!");}
+                else {
+                    db.userDao().insertAll(new User(firstName.getText().toString(), lastName.getText().toString(),
+                            email.getText().toString(), points));
+                    startActivity(new Intent(CreateUser.this, MainActivity.class));
+                }
             }
         });
     }

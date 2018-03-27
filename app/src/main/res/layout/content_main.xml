@@ -8,6 +8,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vlad.famouspeople.MainActivity"
     tools:showIn="@layout/activity_main"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
     android:orientation="vertical">
 
     <EditText
