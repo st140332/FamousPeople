@@ -28,7 +28,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private UserAdapterListener mListener;
 
     public interface UserAdapterListener {
-        void onClickAtOKButton(int position);
+        void onClickAtOKButton(int position,boolean PlusPoint);
     }
 
     public UserAdapter(List<User> users, UserAdapterListener mListener) {
@@ -66,33 +66,14 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
             @Override
             public void onClick(View view) {
-               // user.setEmail(email.getText().toString());
-               // db.userDao().update(user);
-                //users.get(position).setPoints(+1);
-
-                User user = db.userDao().getById(users.get(position).getId());
-                user.setPoints((users.get(position).getPoints())+1);
-                db.userDao().update(user);
-
-
-                //notifyDataSetChanged();
-                //Intent intent = new Intent(context, MainActivity.class);
-                //context.startActivity(intent);
-                mListener.onClickAtOKButton(position);
-
-
+                mListener.onClickAtOKButton(position,true);
             }
         });
 
         holder.minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                User user = db.userDao().getById(users.get(position).getId());
-                user.setPoints((users.get(position).getPoints())-1);
-                db.userDao().update(user);
-
-                Intent intent = new Intent(context, MainActivity.class);
-                context.startActivity(intent);
+                mListener.onClickAtOKButton(position,false);
             }
         });
     }

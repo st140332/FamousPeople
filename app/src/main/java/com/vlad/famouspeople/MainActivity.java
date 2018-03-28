@@ -56,13 +56,24 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new UserAdapter(users, new UserAdapter.UserAdapterListener() {
             @Override
-            public void onClickAtOKButton(int position) {
-                //User user = db.userDao().getById(users.get(position).getId());
-                //user.setPoints((users.get(position).getPoints())+1);
-                //db.userDao().update(user);
-                Toast.makeText(MainActivity.this,"Clicked at : " + position,Toast.LENGTH_SHORT).show();
-                
-               adapter.notifyItemChanged(position);
+            public void onClickAtOKButton(int position,boolean PlusPoint) {
+                User user = db.userDao().getById(users.get(position).getId());
+                if(PlusPoint)
+                {
+                    users.get(position).setPoints(users.get(position).getPoints() + 1);
+                    user.setPoints((users.get(position).getPoints()));
+                    db.userDao().update(user);
+                    Toast.makeText(MainActivity.this,"Plus point! ",Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    users.get(position).setPoints(users.get(position).getPoints() - 1);
+                    user.setPoints((users.get(position).getPoints()));
+                    db.userDao().update(user);
+                    Toast.makeText(MainActivity.this,"Minus point! ",Toast.LENGTH_SHORT).show();
+                }
+
+                adapter.notifyDataSetChanged();
 
             }
         });
@@ -132,11 +143,29 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                 adapter = new UserAdapter(filteredList, new UserAdapter.UserAdapterListener() {
                     @Override
-                    public void onClickAtOKButton(int position) {
-                        Toast.makeText(MainActivity.this,"Clicked from TextWatcher : " + position,Toast.LENGTH_SHORT).show();
+                    public void onClickAtOKButton(int position, boolean PlusPoint) {
+
+                        User user = db.userDao().getById(filteredList.get(position).getId());
+                        if(PlusPoint)
+                        {
+                            filteredList.get(position).setPoints(filteredList.get(position).getPoints() + 1);
+                            //users.get(position).setPoints(filteredList.get(position).getPoints() + 1);
+                            user.setPoints((filteredList.get(position).getPoints()));
+                            db.userDao().update(user);
+                            Toast.makeText(MainActivity.this,"Plus point! ",Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            filteredList.get(position).setPoints(filteredList.get(position).getPoints() - 1);
+                            //users.get(position).setPoints(filteredList.get(position).getPoints() - 1);
+                            user.setPoints((filteredList.get(position).getPoints()));
+                            db.userDao().update(user);
+                            Toast.makeText(MainActivity.this,"Minus point! ",Toast.LENGTH_SHORT).show();
+                        }
+
+                        adapter.notifyDataSetChanged();
                     }
                 });
                 recyclerView.setAdapter(adapter);
