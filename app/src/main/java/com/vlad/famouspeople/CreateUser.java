@@ -52,7 +52,7 @@ public class CreateUser extends AppCompatActivity {
                       //      email.getText().toString(), points));
                     //db.pointDao().insert(new Point(points,1));
                     db.userPointDao().insertUserAndPoint(new User(firstName.getText().toString(), lastName.getText().toString(),
-                                  email.getText().toString(), points),new Point(points,1));
+                            email.getText().toString(), points),new Point(points,1));
                     startActivity(new Intent(CreateUser.this, MainActivity.class));
                 }
             }

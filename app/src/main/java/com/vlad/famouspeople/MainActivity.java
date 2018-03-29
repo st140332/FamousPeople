@@ -74,8 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 else
                 {
                     users.get(position).setPoints(users.get(position).getPoints() - 1);
+                    points.get(position).setCount(points.get(position).getCount() - 1);
                     user.setPoints((users.get(position).getPoints()));
+                    point.setPersonId(users.get(position).getId());
+                    point.setCount(points.get(position).getCount());
                     db.userDao().update(user);
+                    db.pointDao().update(point);
                     Toast.makeText(MainActivity.this,"Minus point! ",Toast.LENGTH_SHORT).show();
                 }
 
