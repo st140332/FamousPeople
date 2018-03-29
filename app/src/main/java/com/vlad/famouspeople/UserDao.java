@@ -22,6 +22,9 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE id = :id")
     User getById(int id);
 
+    @Query("SELECT user.first_name, user.last_name, user.email, point.count FROM user,point WHERE user.id == point.person_id")
+   public List<UserPoint> getAllInfo();
+
     @Insert
     void insertAll(User... users);
 

@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     AppDatabase db = App.getInstance().getDatabase();
     List<User> users = db.userDao().getAllUsers();
+    List<Point> points = db.pointDao().getAllPoints();
     EditText search;
 
     @Override
@@ -58,11 +59,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClickAtOKButton(int position,boolean PlusPoint) {
                 User user = db.userDao().getById(users.get(position).getId());
+                Point point = db.pointDao().getById(points.get(position).getId());
                 if(PlusPoint)
                 {
                     users.get(position).setPoints(users.get(position).getPoints() + 1);
+                    points.get(position).setCount(points.get(position).getCount() + 1);
                     user.setPoints((users.get(position).getPoints()));
+                    point.setPersonId(users.get(position).getId());
+                    point.setCount(points.get(position).getCount());
                     db.userDao().update(user);
+                    db.pointDao().update(point);
                     Toast.makeText(MainActivity.this,"Plus point! ",Toast.LENGTH_SHORT).show();
                 }
                 else
