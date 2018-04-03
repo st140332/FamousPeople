@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     AppDatabase db = App.getInstance().getDatabase();
     List<User> users = db.userDao().getAllUsers();
     List<Point> points = db.pointDao().getAllPoints();
+    List<UserPoint> userspoints = db.userDao().getAllInfo();
     EditText search;
 
     @Override
@@ -55,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new UserAdapter(users, new UserAdapter.UserAdapterListener() {
+        adapter = new UserAdapter(userspoints, new UserAdapter.UserAdapterListener() {
             @Override
             public void onClickAtOKButton(int position,boolean PlusPoint) {
                 User user = db.userDao().getById(users.get(position).getId());
@@ -64,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
                 {
                     users.get(position).setPoints(users.get(position).getPoints() + 1);
                     points.get(position).setCount(points.get(position).getCount() + 1);
-                    user.setPoints((users.get(position).getPoints()));
+                    userspoints.get(position).setCount(userspoints.get(position).getCount() + 1);
+                    //user.setPoints((users.get(position).getPoints()));
                     point.setPersonId(users.get(position).getId());
                     point.setCount(points.get(position).getCount());
                     db.userDao().update(user);
@@ -75,7 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 {
                     users.get(position).setPoints(users.get(position).getPoints() - 1);
                     points.get(position).setCount(points.get(position).getCount() - 1);
-                    user.setPoints((users.get(position).getPoints()));
+                    userspoints.get(position).setCount(userspoints.get(position).getCount() - 1);
+                    //user.setPoints((users.get(position).getPoints()));
                     point.setPersonId(users.get(position).getId());
                     point.setCount(points.get(position).getCount());
                     db.userDao().update(user);
@@ -114,15 +117,15 @@ public class MainActivity extends AppCompatActivity {
         {
             case R.id.byname:
                 Toast.makeText(MainActivity.this,"Sorted!",Toast.LENGTH_SHORT).show();
-                Collections.sort(users, new NameComparator());
+                Collections.sort(userspoints, new NameComparator());
                 break;
             case R.id.bysurname:
                 Toast.makeText(MainActivity.this,"Sorted!",Toast.LENGTH_SHORT).show();
-                Collections.sort(users, new SurnameComparator());
+                Collections.sort(userspoints, new SurnameComparator());
                 break;
             case R.id.bypoints:
                 Toast.makeText(MainActivity.this,"Sorted!",Toast.LENGTH_SHORT).show();
-                Collections.sort(users, new PointsComparator());
+                Collections.sort(userspoints, new PointsComparator());
                 break;
         }
         //adapter = new UserAdapter(users,null);
@@ -142,14 +145,14 @@ public class MainActivity extends AppCompatActivity {
 
                 query = query.toString().toLowerCase();
 
-                final List<User> filteredList = new ArrayList<>();
+                final List<UserPoint> filteredList = new ArrayList<>();
 
-                for (int i = 0; i < users.size(); i++) {
+                for (int i = 0; i < userspoints.size(); i++) {
 
-                    final String text = users.get(i).getFirstName().toLowerCase();
+                    final String text = userspoints.get(i).getFirstName().toLowerCase();
                     if (text.contains(query)) {
 
-                        filteredList.add(users.get(i));
+                        filteredList.add(userspoints.get(i));
                     }
                 }
 
@@ -158,20 +161,25 @@ public class MainActivity extends AppCompatActivity {
                     public void onClickAtOKButton(int position, boolean PlusPoint) {
 
                         User user = db.userDao().getById(filteredList.get(position).getId());
+                        Point point = db.pointDao().getById(filteredList.get(position).getId());
                         if(PlusPoint)
                         {
-                            filteredList.get(position).setPoints(filteredList.get(position).getPoints() + 1);
-                            //users.get(position).setPoints(filteredList.get(position).getPoints() + 1);
-                            user.setPoints((filteredList.get(position).getPoints()));
+                            filteredList.get(position).setCount(filteredList.get(position).getCount() + 1);
+                            users.get(position).setPoints(filteredList.get(position).getCount() + 1);
+                            //user.setPoints((filteredList.get(position).getCount()));
+                            point.setCount((filteredList.get(position).getCount()));
                             db.userDao().update(user);
+                            db.pointDao().update(point);
                             Toast.makeText(MainActivity.this,"Plus point! ",Toast.LENGTH_SHORT).show();
                         }
                         else
                         {
-                            filteredList.get(position).setPoints(filteredList.get(position).getPoints() - 1);
-                            //users.get(position).setPoints(filteredList.get(position).getPoints() - 1);
-                            user.setPoints((filteredList.get(position).getPoints()));
+                            filteredList.get(position).setCount(filteredList.get(position).getCount() - 1);
+                            users.get(position).setPoints(filteredList.get(position).getCount() - 1);
+                           // user.setPoints((filteredList.get(position).getCount()));
+                            point.setCount((filteredList.get(position).getCount()));
                             db.userDao().update(user);
+                            db.pointDao().update(point);
                             Toast.makeText(MainActivity.this,"Minus point! ",Toast.LENGTH_SHORT).show();
                         }
 

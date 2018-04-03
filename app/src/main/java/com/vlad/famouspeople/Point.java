@@ -13,7 +13,7 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 @Entity(foreignKeys = @ForeignKey(entity = User.class, parentColumns = "id", childColumns = "person_id", onDelete = CASCADE))
 public class Point {
 
-    public Point(Integer count, long personId) {
+    public Point(Integer count,long personId) {
         this.count = count;
         this.personId = personId;
     }

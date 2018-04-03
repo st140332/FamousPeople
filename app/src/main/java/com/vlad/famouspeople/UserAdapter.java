@@ -24,6 +24,7 @@ import static android.support.v4.content.ContextCompat.startActivity;
 
 class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     List<User> users;
+    List<UserPoint> userspoints;
     private  Context context;
     private UserAdapterListener mListener;
 
@@ -31,8 +32,8 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         void onClickAtOKButton(int position,boolean PlusPoint);
     }
 
-    public UserAdapter(List<User> users, UserAdapterListener mListener) {
-        this.users = users;
+    public UserAdapter(List<UserPoint> userspoints, UserAdapterListener mListener) {
+        this.userspoints = userspoints;
         this.mListener = mListener;
     }
 
@@ -45,18 +46,18 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final UserAdapter.ViewHolder holder, final int position) {
-        holder.firstName.setText(users.get(position).getFirstName());
-        holder.lastName.setText(users.get(position).getLastName());
-        holder.email.setText(users.get(position).getEmail());
-        holder.points.setText(Integer.toString(users.get(position).getPoints()));
+        holder.firstName.setText(userspoints.get(position).getFirstName());
+        holder.lastName.setText(userspoints.get(position).getLastName());
+        holder.email.setText(userspoints.get(position).getEmail());
+        holder.points.setText(Integer.toString(userspoints.get(position).getCount()));
         holder.linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, UpdateUser.class);
-                intent.putExtra("FName", users.get(position).getFirstName());
-                intent.putExtra("LName", users.get(position).getLastName());
-                intent.putExtra("Email", users.get(position).getEmail());
-                intent.putExtra("Id",users.get(position).getId());
+                intent.putExtra("FName", userspoints.get(position).getFirstName());
+                intent.putExtra("LName", userspoints.get(position).getLastName());
+                intent.putExtra("Email", userspoints.get(position).getEmail());
+                intent.putExtra("Id",userspoints.get(position).getId());
                 context.startActivity(intent);
             }
         });
@@ -80,7 +81,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return userspoints.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

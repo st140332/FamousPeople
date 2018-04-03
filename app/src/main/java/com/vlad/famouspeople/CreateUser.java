@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Vlad on 20.03.2018.
@@ -26,6 +27,9 @@ public class CreateUser extends AppCompatActivity {
     EditText email;
     Button button;
     int points=0;
+    AppDatabase db = App.getInstance().getDatabase();
+    List<User> userss;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,11 +52,12 @@ public class CreateUser extends AppCompatActivity {
                else if(TextUtils.isEmpty(surname))
                 {lastName.setError("Enter Lastname!");}
                 else {
-                    //db.userDao().insertAll(new User(firstName.getText().toString(), lastName.getText().toString(),
-                      //      email.getText().toString(), points));
-                    //db.pointDao().insert(new Point(points,1));
-                    db.userPointDao().insertUserAndPoint(new User(firstName.getText().toString(), lastName.getText().toString(),
-                            email.getText().toString(), points),new Point(points,1));
+                    db.userDao().insertAll(new User(firstName.getText().toString(), lastName.getText().toString(),
+                            email.getText().toString(), points));
+                    userss= db.userDao().getAllUsers();
+                    db.pointDao().insert(new Point(points,userss.get(userss.size()-1).getId()));
+                    //db.userPointDao().insertUserAndPoint(new User(firstName.getText().toString(), lastName.getText().toString(),
+                    //        email.getText().toString(), points),new Point(points,1));
                     startActivity(new Intent(CreateUser.this, MainActivity.class));
                 }
             }

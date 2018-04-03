@@ -1,6 +1,7 @@
 package com.vlad.famouspeople.Sort;
 
 import com.vlad.famouspeople.User;
+import com.vlad.famouspeople.UserPoint;
 
 import java.util.Comparator;
 
@@ -9,11 +10,11 @@ import java.util.Comparator;
  * Created by Vlad on 26.03.2018.
  */
 
-public class NameComparator implements Comparator<User>
+public class NameComparator implements Comparator<UserPoint>
 {
+
     @Override
-    public int compare(User user, User t1)
-    {
-        return user.getFirstName().compareTo(t1.getFirstName());
+    public int compare(UserPoint userPoint, UserPoint t1) {
+        return userPoint.getFirstName().compareTo(t1.getFirstName());
     }
 }
