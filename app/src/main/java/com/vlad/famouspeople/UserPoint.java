@@ -50,11 +50,7 @@ public class UserPoint {
         this.email = email;
     }
 
-    public Integer getCount() {
-        return count;
-    }
+   public Integer getCount() {return count;}
 
-    public void setCount(Integer count) {
-        this.count = count;
-    }
+    public void setCount(Integer count) {this.count = count;}
 }

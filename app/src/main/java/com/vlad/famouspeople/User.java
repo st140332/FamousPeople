@@ -10,11 +10,10 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity
 public class User {
 
-    public User(String firstName, String lastName, String email,Integer points) {
+    public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
-        this.points=points;
     }
 
     @PrimaryKey(autoGenerate = true)
@@ -25,8 +24,6 @@ public class User {
     private String lastName;
     @ColumnInfo(name = "email")
     private String email;
-    @ColumnInfo(name = "points")
-    private Integer points;
 
     public int getId() {
         return id;
@@ -60,7 +57,4 @@ public class User {
         this.email = email;
     }
 
-    public Integer getPoints() {return points;}
-
-    public void setPoints(Integer points) {this.points = points;}
 }

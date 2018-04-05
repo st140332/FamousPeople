@@ -22,7 +22,8 @@ public interface UserDao {
     @Query("SELECT * FROM user WHERE id = :id")
     User getById(int id);
 
-    @Query("SELECT point.id, user.first_name, user.last_name, user.email, point.count FROM user,point WHERE user.id == point.id") // WHERE user.id == point.person_id
+    @Query("SELECT user.id, user.first_name, user.last_name, user.email, point.count FROM user LEFT JOIN point ON point.person_id = user.id " +
+            "GROUP BY user.id") // WHERE user.id == point.person_id
     List<UserPoint> getAllInfo();
 
     @Insert

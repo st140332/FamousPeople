@@ -2,6 +2,7 @@ package com.vlad.famouspeople;
 
 import android.arch.persistence.room.Room;
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,8 +13,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 
 /**
  * Created by Vlad on 20.03.2018.
@@ -53,9 +61,10 @@ public class CreateUser extends AppCompatActivity {
                 {lastName.setError("Enter Lastname!");}
                 else {
                     db.userDao().insertAll(new User(firstName.getText().toString(), lastName.getText().toString(),
-                            email.getText().toString(), points));
+                            email.getText().toString()));
                     userss= db.userDao().getAllUsers();
-                    db.pointDao().insert(new Point(points,userss.get(userss.size()-1).getId()));
+                    String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
+                    db.pointDao().insert(new Point(points,userss.get(userss.size()-1).getId(),"CREATED",date));
                     //db.userPointDao().insertUserAndPoint(new User(firstName.getText().toString(), lastName.getText().toString(),
                     //        email.getText().toString(), points),new Point(points,1));
                     startActivity(new Intent(CreateUser.this, MainActivity.class));
