@@ -19,6 +19,9 @@ public interface PointDao {
     @Query("SELECT * FROM point WHERE id = :id")
     Point getById(int id);
 
+    @Query("SELECT id,count,comment,created_at,person_id,author_id FROM point WHERE person_id = :id")
+    List<Point> getUserPoints(int id);
+
     @Insert
     void insert(Point point);
 
