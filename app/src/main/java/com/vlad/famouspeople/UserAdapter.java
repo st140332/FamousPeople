@@ -45,7 +45,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(final UserAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(UserAdapter.ViewHolder holder, final int position) {
         holder.firstName.setText(userspoints.get(position).getFirstName());
         holder.lastName.setText(userspoints.get(position).getLastName());
         holder.email.setText(userspoints.get(position).getEmail());
@@ -62,7 +62,7 @@ class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             }
         });
 
-        final AppDatabase db = App.getInstance().getDatabase();
+        AppDatabase db = App.getInstance().getDatabase();
         holder.plus.setOnClickListener(new View.OnClickListener() {
 
             @Override

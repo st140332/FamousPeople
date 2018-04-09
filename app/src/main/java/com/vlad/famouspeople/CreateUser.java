@@ -34,7 +34,7 @@ public class CreateUser extends AppCompatActivity {
     EditText lastName;
     EditText email;
     Button button;
-    int points=0;
+    Integer points=0;
     AppDatabase db = App.getInstance().getDatabase();
     List<User> userss;
 
@@ -64,7 +64,7 @@ public class CreateUser extends AppCompatActivity {
                             email.getText().toString()));
                     userss= db.userDao().getAllUsers();
                     String date = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.getDefault()).format(new Date());
-                    db.pointDao().insert(new Point(points,userss.get(userss.size()-1).getId(),"CREATED",date));
+                    db.pointDao().insert(new Point(0,userss.get(userss.size()-1).getId(),"CREATED",date));
                     //db.userPointDao().insertUserAndPoint(new User(firstName.getText().toString(), lastName.getText().toString(),
                     //        email.getText().toString(), points),new Point(points,1));
                     startActivity(new Intent(CreateUser.this, MainActivity.class));

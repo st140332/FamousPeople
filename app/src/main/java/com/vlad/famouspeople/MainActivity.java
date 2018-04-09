@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     AppDatabase db = App.getInstance().getDatabase();
     List<User> users = db.userDao().getAllUsers();
     List<Point> points = db.pointDao().getAllPoints();
-    List<UserPoint> userspoints = db.userDao().getAllInfo();
+    List<UserPoint> userspoints= db.userDao().getAllInfo();
     EditText search;
-    final Context context = this;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         recyclerView=(RecyclerView)findViewById(R.id.recycler_view) ;
         search=(EditText)findViewById(R.id.search) ;
 
@@ -68,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new UserAdapter(userspoints, new UserAdapter.UserAdapterListener() {
             @Override
-            public void onClickAtOKButton(final int position, boolean PlusPoint) {
+            public void onClickAtOKButton(int position, boolean PlusPoint) {
                 User user = db.userDao().getById(users.get(position).getId());
                 Point point = db.pointDao().getById(points.get(position).getId());
 
@@ -123,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void popUpEditText(final int position,final int amount, final List<UserPoint> workList) {
+    private void popUpEditText(final int position, final int amount, final List<UserPoint> workList) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Comments");
 
